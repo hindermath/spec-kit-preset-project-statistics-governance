@@ -192,7 +192,9 @@ function Get-StatisticsMeasurement {
     }
     $orderedDaily=[ordered]@{}
     foreach ($key in @($daily.Keys | Sort-Object)) { $orderedDaily[$key]=$daily[$key] }
-    $identity=[ordered]@{objects=@($objects.ToArray()); history=@($history.ToArray())}
+    # Coverage is observable output too: an added excluded path or submodule
+    # must invalidate freshness even when counted text remains unchanged.
+    $identity=[ordered]@{objects=@($objects.ToArray()); history=@($history.ToArray()); omitted=$omitted}
     [ordered]@{
         sourceRevision=$Commit; asOf=$Cutoff; timeZone=$Configuration.timeZone
         windowStart=$start.ToString('yyyy-MM-dd'); windowWeeks=$Configuration.activityWindowWeeks

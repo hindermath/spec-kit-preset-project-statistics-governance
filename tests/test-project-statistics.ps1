@@ -212,6 +212,14 @@ try {
     $snapshot=Get-Content 'docs/project-statistics/snapshot.json' -Raw | ConvertFrom-Json -AsHashtable
     Assert-Test ($snapshot.measurement.asOf -ceq '2026-01-05') 'Committer date uses configured timezone'
     Save-TestCommit 'timezone report'
+    Write-TestFile 'STATS.md' "excluded ledger`n"
+    Save-TestCommit 'coverage-only change'
+    $status=Invoke-TestEngine Status 1
+    Assert-Test ($status.reproducible -and -not $status.current) 'Coverage-only change invalidates freshness'
+    $null=Invoke-TestEngine Update
+    Save-TestCommit 'coverage report'
+    $null=Invoke-TestEngine Status
+    $snapshot=Get-Content 'docs/project-statistics/snapshot.json' -Raw | ConvertFrom-Json -AsHashtable
     $snapshot.measurement.totalTextLines=999
     Write-TestFile 'docs/project-statistics/snapshot.json' (($snapshot|ConvertTo-Json -Depth 30)+"`n")
     $status=Invoke-TestEngine Status 1
