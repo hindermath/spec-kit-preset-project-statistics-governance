@@ -36,8 +36,9 @@ specify preset resolve project-statistics-contract
 
 Installation startet keine Messung oder Migration. Zur lokalen Entwicklung:
 `specify preset add --dev <package-directory> --priority 90`.
+Dabei ein entpacktes Git-Archiv ohne `.git` verwenden, keinen Arbeitsklon.
 Installation starts no measurement or migration. The development command uses
-an explicitly selected local package.
+an explicitly selected unpacked Git archive without `.git`, not a working clone.
 
 ## Sicherer Ablauf / Safe workflow
 

@@ -216,6 +216,29 @@ try {
     Write-TestFile 'docs/project-statistics/snapshot.json' (($snapshot|ConvertTo-Json -Depth 30)+"`n")
     $status=Invoke-TestEngine Status 1
     Assert-Test (-not $status.reproducible) 'Snapshot metrics tampering detected'
+    $null=Invoke-TestGit @('config','remote.fixture.promisor','true')
+    $null=Invoke-TestEngine Status 2
+    $null=Invoke-TestGit @('config','--unset','remote.fixture.promisor')
+    if(-not $IsWindows){
+        $bashPath=(Get-Command bash).Source
+        $dirnamePath=(Get-Command dirname).Source
+        $fakeBin=Join-Path $root 'fake-tools'
+        $null=New-Item -ItemType Directory -Path $fakeBin
+        $null=New-Item -ItemType SymbolicLink -Path (Join-Path $fakeBin 'dirname') -Target $dirnamePath
+        $savedPath=$env:PATH
+        try {
+            $env:PATH=$fakeBin
+            $failure=& $bashPath $wrapper status --repo $root 2>&1
+            Assert-Test ($LASTEXITCODE -eq 2 -and ($failure -join ' ').Contains('PowerShell 7')) 'Missing PowerShell blocks before measurement'
+        } finally { $env:PATH=$savedPath }
+        Write-TestFile 'fake-tools/pwsh' "#!/bin/sh`necho 6`n"
+        & chmod +x (Join-Path $fakeBin 'pwsh')
+        try {
+            $env:PATH=$fakeBin
+            $failure=& $bashPath $wrapper status --repo $root 2>&1
+            Assert-Test ($LASTEXITCODE -eq 2 -and ($failure -join ' ').Contains('PowerShell 7')) 'Old PowerShell blocks before measurement'
+        } finally { $env:PATH=$savedPath }
+    }
     $shallow=Join-Path $root 'shallow'
     $null=Invoke-TestGit @('clone','-q','--no-local','--depth=1',$root,$shallow)
     Set-Location $shallow

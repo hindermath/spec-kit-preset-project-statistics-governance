@@ -24,6 +24,15 @@ function Invoke-InstallTest {
 }
 try {
     $null=New-Item -ItemType Directory -Path $root,(Join-Path $root '.specify/templates'),(Join-Path $root '.agents/skills'),(Join-Path $root '.claude/commands') -Force
+    # Test the deliverable, not a developer checkout containing .git object files.
+    # In particular, Windows Git objects may be read-only and are not package data.
+    $archive=Join-Path $root 'candidate.zip'
+    $candidate=Join-Path $root 'package'
+    if(Test-Path -LiteralPath (Join-Path $Package '.git')){
+        $null=Invoke-InstallTest git @('-C',$Package,'archive','--format=zip','--output',$archive,'HEAD')
+        Expand-Archive -LiteralPath $archive -DestinationPath $candidate
+        $Package=$candidate
+    }
     Set-Location $root
     $null=Invoke-InstallTest git @('init','-q')
     foreach($name in @('constitution','plan','tasks')){

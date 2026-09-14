@@ -43,7 +43,7 @@ $script:End='<!-- project-transparency:end -->'
 . (Join-Path $PSScriptRoot 'lib/profile-helpers.ps1')
 
 function Invoke-StatisticsGit {
-    param([string[]]$Arguments)
+    param([string[]]$Arguments,[switch]$AllowMissing)
     $info=[Diagnostics.ProcessStartInfo]::new('git')
     $info.WorkingDirectory=$script:Root
     $info.UseShellExecute=$false
@@ -60,6 +60,7 @@ function Invoke-StatisticsGit {
         $stdout=$process.StandardOutput.ReadToEnd()
         $process.WaitForExit()
         $null=$stderr.GetAwaiter().GetResult()
+        if ($AllowMissing -and $process.ExitCode -eq 1) { return '' }
         if ($process.ExitCode -ne 0) { throw 'Git-Abfrage fehlgeschlagen / Git query failed; verify repository and revision.' }
         return $stdout
     } finally { $process.Dispose() }
@@ -260,7 +261,7 @@ function Get-StatisticsReport {
         $lines.Add('Keine automatische Abschluss-Evidence / Not automatic completion evidence.')
         foreach ($phase in @($Configuration.phases | Sort-Object slot)) {
             $lines.Add(''); $lines.Add("Slot $($phase.slot): $($phase.id)")
-            $lines.Add("DE: $($phase.labelDe)"); $lines.Add("EN: $($phase.labelEn)")
+            $lines.Add("DE: $(ConvertTo-StatisticsLabel $phase.labelDe)"); $lines.Add("EN: $(ConvertTo-StatisticsLabel $phase.labelEn)")
             $lines.Add("Textzeilen / Text lines: $($phase.netLines)")
         }
     }
@@ -270,7 +271,7 @@ function Get-StatisticsReport {
         $lines.Add('EN: Text inventory / (Git-active days * reference lines per day); not measured time savings.')
         foreach ($scenario in $Configuration.references.scenarios) {
             $factor=if ($Measurement.activeDays -gt 0) { Format-Decimal ($Measurement.totalTextLines/($Measurement.activeDays*$scenario.linesPerDay)) } else { 'nicht berechenbar / not calculable' }
-            $lines.Add("$($scenario.name): $factor; reference=$($scenario.linesPerDay) lines/day")
+            $lines.Add("$(ConvertTo-StatisticsLabel $scenario.name): $factor; reference=$($scenario.linesPerDay) lines/day")
         }
     }
     $lines.Add(''); $lines.Add($script:End)
@@ -291,10 +292,18 @@ function Merge-StatisticsReport {
     $existing.Substring(0,$first)+$Generated.TrimEnd("`n")+$existing.Substring($last+$script:End.Length)
 }
 
+function ConvertTo-StatisticsLabel {
+    param([string]$Label)
+    # Project-authored labels are data, not executable HTML or Markdown images.
+    [Net.WebUtility]::HtmlEncode($Label).Replace('\','\\').Replace('[','\[').Replace(']','\]').Replace('`','\`')
+}
+
 try {
     $script:Root=(Resolve-Path -LiteralPath $Repo).Path
     $script:Root=(Invoke-StatisticsGit @('rev-parse','--show-toplevel')).Trim()
     if ((Invoke-StatisticsGit @('rev-parse','--is-shallow-repository')).Trim() -ne 'false') { throw 'Unvollstaendige Historie / Shallow history blocked.' }
+    $partial=Invoke-StatisticsGit -Arguments @('config','--get-regexp','^(extensions\.partialclone|remote\..*\.promisor)$') -AllowMissing
+    if ($partial) { throw 'Partial/promisor clones blocked; no implicit network fetch.' }
     Assert-StatisticsPath $Config
     if ((Split-Path $Config -Leaf) -in @('report.md','snapshot.json')) { throw 'Configuration must not alias an output file.' }
     $script:OutputDirectory=($Config -split '/')[0..(($Config -split '/').Count-2)] -join '/'

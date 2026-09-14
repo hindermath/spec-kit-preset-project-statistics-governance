@@ -46,6 +46,10 @@ pointers remain pointer text; never fetch LFS content. Imported code remains
 included unless explicitly excluded. Control characters in Git paths are
 unsupported and block instead of silently truncating coverage.
 
+Shallow- und Partial-/Promisor-Klone blockieren; es erfolgt kein automatisches
+Nachladen fehlender Git-Objekte. Shallow and partial/promisor clones block;
+missing Git objects are never fetched automatically.
+
 ## Aenderungen und Zeitraum / Changes and period
 
 Bruttovolumen ist hinzugefuegte plus entfernte Zeilen aus Nicht-Merge-Commits.
