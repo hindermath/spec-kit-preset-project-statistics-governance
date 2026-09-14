@@ -38,13 +38,18 @@ jobs:
       - name: Native fixtures
         shell: pwsh
         run: |
-          & ./tests/test-project-statistics.ps1 | Tee-Object -FilePath fixture-evidence.txt
-          if (-not $?) { exit 1 }
+          # A child process isolates fixture cwd and expected negative exit codes.
+          $output = & pwsh -NoProfile -File ./tests/test-project-statistics.ps1 2>&1
+          $code = $LASTEXITCODE
+          $output | Tee-Object -FilePath fixture-evidence.txt
+          exit $code
       - name: Installed surfaces
         shell: pwsh
         run: |
-          & ./tests/test-installed-preset.ps1 | Tee-Object -FilePath install-evidence.txt
-          if (-not $?) { exit 1 }
+          $output = & pwsh -NoProfile -File ./tests/test-installed-preset.ps1 2>&1
+          $code = $LASTEXITCODE
+          $output | Tee-Object -FilePath install-evidence.txt
+          exit $code
       - name: Exact source evidence
         shell: pwsh
         run: |
