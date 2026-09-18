@@ -83,6 +83,7 @@ Exit codes: 0 success, 1 drift, 2 invalid input or blocked prerequisite.
 - [CLI-Referenz / CLI reference](docs/man/project-statistics.1.md)
 - [Herkunft und Lieferkette / Provenance and supply chain](docs/provenance.md)
 - [Lieferung und Feldtest / Delivery and field test](docs/delivery.md)
+- [Zentraler Feldtestbericht v0.1.0 / Central field-test report v0.1.0](docs/field-tests/v0.1.0/report.md)
 
 ## Tests und Status / Tests and status
 

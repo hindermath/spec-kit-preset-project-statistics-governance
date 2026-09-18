@@ -1,5 +1,19 @@
 # Lieferung und Feldtest / Delivery and field test
 
+## Zentraler Bericht / Central report
+
+Der [Feldtestbericht v0.1.0](field-tests/v0.1.0/report.md) fuehrt die drei
+gemergten Piloten mit einem Hash-Manifest und archivierten CI-Nachweisen zusammen.
+Technische Empfehlung: `ReleaseAccepted`; getrennte fachliche Abnahme: `Accepted`
+am 2026-09-18, mit Entscheidungsnachweis im Bericht.
+Der Bericht erteilt keine stabile Release- oder Community-Freigabe.
+
+The [v0.1.0 field report](field-tests/v0.1.0/report.md) combines the three merged
+pilots, a hash manifest and archived CI evidence. Technical recommendation:
+`ReleaseAccepted`; separate human acceptance: `Accepted` on 2026-09-18, with
+the decision record linked in the report. No stable release or
+community submission is authorized by the report.
+
 ## Autorisierter Umfang / Authorized scope
 
 Owner und fachlicher Reviewer: @hindermath. Zentrales Tracking:
