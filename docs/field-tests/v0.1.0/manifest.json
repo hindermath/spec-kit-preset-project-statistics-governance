@@ -5,7 +5,15 @@
   "sourceCommit": "7e824ca8de11212aefdc5b05d7d05637f5343dab",
   "archiveSha256": "d8ad7d5eef920f50b629121b64ba8123c22ec4f6dadd14da5cd826d1c50f420a",
   "technicalRecommendation": "ReleaseAccepted",
-  "humanAcceptance": "Pending",
+  "humanAcceptance": "Accepted",
+  "humanAcceptanceRecord": {
+    "date": "2026-09-18",
+    "reviewer": "hindermath",
+    "acceptedReportHead": "abe5a8761ae4fe6445b782a14e9570a75bd5c29b",
+    "decisionUrl": "https://github.com/hindermath/spec-kit-preset-project-statistics-governance/pull/3#issuecomment-5733063715",
+    "source": "Explicit owner approval in Codex conversation, transcribed by Codex; not an independent GitHub review",
+    "deliveryAuthorized": true
+  },
   "scope": "Three-repository technical field test; not stable promotion, community submission or productivity measurement",
   "projects": [
     {

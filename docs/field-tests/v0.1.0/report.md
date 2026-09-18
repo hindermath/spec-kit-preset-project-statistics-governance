@@ -6,17 +6,17 @@ Stand: 2026-09-18. Preset: Project Statistics Governance v0.1.0.
 Technische Zusammenstellung und Quellenpruefung: Codex.
 Owner und fachlicher Reviewer: Thorsten Hindermann (@hindermath).
 
-**Technische Empfehlung: `ReleaseAccepted`. Fachliche Abnahme: `Pending`.**
+**Technische Empfehlung: `ReleaseAccepted`. Fachliche Abnahme: `Accepted`.**
 Die Empfehlung gilt ausschliesslich fuer das unveraenderte v0.1.0-Paket im
 unten belegten Drei-Repository-Feldtest. Sie ist keine stabile Releasefreigabe,
 Community-Einreichung, Produktabnahme oder Freigabe weiterer Rollouts.
-Dieser Bericht ist der kanonische, repositoryuebergreifende Abschlussentwurf.
+Dieser Bericht ist der kanonische, fachlich abgenommene Abschlussbericht.
 Fruehere lokale Pilotberichte bleiben datierte Einzelbelege, auch wenn sie
 inzwischen ueberholte Aussagen zu noch ausstehenden Lieferungen enthalten.
 
 As of 2026-09-18, the technical recommendation is `ReleaseAccepted` for the
 unchanged v0.1.0 package in the three documented pilots. Human acceptance is
-`Pending`. This canonical cross-repository report does not promote a stable
+`Accepted`. This canonical cross-repository report does not promote a stable
 release, submit to the community catalog, accept a product or authorize more
 rollouts. Earlier pilot reports remain historical evidence, not current status.
 
@@ -256,33 +256,44 @@ not a claim that the package is free of all defects.
 
 ## Getrennte fachliche Abnahme / Separate human acceptance
 
-Status: **Pending**. Reviewer: **@hindermath**. Datum und Entscheidungslink:
-**noch nicht vorhanden / not yet available**.
+Status: **Accepted**. Reviewer: **@hindermath**. Datum: **2026-09-18**.
+[Entscheidungsnachweis / decision record](https://github.com/hindermath/spec-kit-preset-project-statistics-governance/pull/3#issuecomment-5733063715).
+Abgenommener Berichts-Head / accepted report head:
+`abe5a8761ae4fe6445b782a14e9570a75bd5c29b`.
 
-- [ ] Zweck und Darstellung als reproduzierbare Projekttransparenz akzeptiert.
-- [ ] Quellenbindung, Methodikunterschiede, Plattformgrenzen und Restrisiken gesichtet.
-- [ ] Technische Empfehlung ausschliesslich fuer diesen v0.1.0-Feldtest akzeptiert.
-- [ ] Keine Produktivitaets-, Lernleistungs-, Produkt- oder Zertifizierungsfreigabe abgeleitet.
-- [ ] Lieferung des zentralen Berichts am benannten PR-Head ausdruecklich freigegeben.
+Thorsten Hindermann bestaetigte nach Vorlage des Berichts in der Codex-Sitzung:
+„Ich bestätige anschließend die fachliche Abnahme und Lieferfreigabe!“
+Codex dokumentiert diese Nutzerentscheidung; sie ist kein unabhaengiges
+GitHub-Review. Dieser Folgecommit erfasst nur die Abnahme. Paket, Messungen
+und archivierte Ergebnisbytes bleiben unveraendert. Die finale Lieferung
+benoetigt erneut gruene Checks und einen Merge am exakt geprueften Head.
 
-The human reviewer must accept purpose, source binding, method differences,
-platform limits and residual risks; accept the bounded technical recommendation;
-and explicitly approve delivery of the report at the named PR head. The boxes
-remain unchecked until actual review. Record the dated decision and permanent
-review/comment link in a subsequent report update; do not infer approval from
-earlier pilot approvals or successful technical checks.
+- [x] Zweck und Darstellung als reproduzierbare Projekttransparenz akzeptiert.
+- [x] Quellenbindung, Methodikunterschiede, Plattformgrenzen und Restrisiken gesichtet.
+- [x] Technische Empfehlung ausschliesslich fuer diesen v0.1.0-Feldtest akzeptiert.
+- [x] Keine Produktivitaets-, Lernleistungs-, Produkt- oder Zertifizierungsfreigabe abgeleitet.
+- [x] Lieferung des zentralen Berichts am benannten PR-Head ausdruecklich freigegeben.
 
-Tracking bleibt offen: [Preset #1](https://github.com/hindermath/spec-kit-preset-project-statistics-governance/issues/1),
+The owner explicitly confirmed human acceptance and delivery authorization
+after receiving this report. The dated decision record above binds the accepted
+head and records the user's conversation approval, not an independent GitHub
+review. This follow-up only records acceptance; package code, measurements
+and original evidence remain unchanged. Delivery still requires fresh green
+checks and an exact-head merge. Acceptance is not inferred from earlier pilot
+approvals or technical tests.
+
+Abschluss-Tracking / closeout tracking: [Preset #1](https://github.com/hindermath/spec-kit-preset-project-statistics-governance/issues/1),
 [Home #298](https://github.com/hindermath/home-baseline/issues/298),
 [TinyCalc #84](https://github.com/hindermath/TinyCalc/issues/84),
 [Sandbox #70](https://github.com/hindermath/absdd-image-sandbox/issues/70).
-Erst nach fachlicher Abnahme und Merge des zentralen Berichts ist ein
-ausdruecklicher Abschluss moeglich. Stabile Veroeffentlichung, Community-
-Einreichung und Legacy-Migration bleiben separate Entscheidungen.
+Die fachliche Abnahme ist erteilt; die Issues werden erst nach bestaetigtem
+Merge des zentralen Berichts mit Liefernachweis geschlossen. Stabile
+Veroeffentlichung, Community-Einreichung und Legacy-Migration bleiben separate
+Entscheidungen.
 
-Tracking stays open until separate human acceptance and merge of the central
-report. Stable publication, community submission and legacy migration remain
-separate decisions.
+Human acceptance is recorded; close tracking only after the central report's
+merge is verified and linked as delivery evidence. Stable publication, community
+submission and legacy migration remain separate decisions.
 
 ## Dokumentationsauswirkung / Documentation impact
 
