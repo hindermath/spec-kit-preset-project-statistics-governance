@@ -183,6 +183,32 @@ only the selected integration files under project policy. Do not commit the
 preset cache. Continue with a clean worktree; avoid broad staging of unrelated
 or unreviewed files.
 
+### Zusammenspiel mit anderen Presets / Composition with Other Presets
+
+Das [Manifest](preset.yml) ergänzt Constitution, Plan und Tasks mit `append`
+und registriert drei eigene Statistik-Commands. Es umhüllt nicht Specify und
+startet nach einem Feature-Abschluss keine Messung automatisch. Konfiguration
+entsteht erst durch autorisiertes Init; `project-statistics-contract` ist eine
+Vertragsvorlage, kein ausgefüllter Bericht oder Mess-Snapshot.
+
+*The [manifest](preset.yml) appends to constitution, plan and tasks and
+registers three standalone statistics commands. It does not wrap Specify or
+measure automatically after a feature. Authorized Init creates configuration;
+project-statistics-contract is a contract template, not a report or snapshot.*
+
+Kleinere Prioritätszahlen haben höhere Auflösungspriorität. `append` ergänzt;
+gleichnamige `replace`-Beiträge oder Projekt-Overrides können darunterliegende
+Beiträge verdrängen. Eigene Reihenfolgen und Drittanbieter-Kombinationen
+separat prüfen, etwa über `specify preset resolve plan-template` und erzeugte
+Agentenflächen. Priorität 90 ist kein automatisch späterer Messzeitpunkt und
+ersetzt weder sauberen Git-Stand noch Schreibfreigabe.
+
+*Lower numbers mean higher precedence. Append adds; same-name replace layers
+or overrides can hide lower contributions. Check custom orderings and
+third-party combinations using plan-template resolution and generated agent
+surfaces. Priority 90 does not schedule measurement or replace clean Git state
+and write authority.*
+
 <a id="workflow"></a>
 ## Erster vollstaendiger Ablauf / First complete workflow
 
