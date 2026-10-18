@@ -1,5 +1,12 @@
 # Project Statistics Governance
 
+Patch **0.1.1** liefert die verbesserte zweisprachige Einstiegs- und
+Kompositionsdokumentation. Verhalten und Berechtigungsgrenzen bleiben erhalten.
+[Release-Nachweis / Release record](docs/release-0.1.1-validation.md).
+
+*Patch 0.1.1 packages the improved bilingual getting-started and composition
+guide. Behavior and authority boundaries remain unchanged.*
+
 **Reproduzierbare Projekttransparenz fuer Git und Spec Kit.**
 **Reproducible project transparency for Git and Spec Kit.**
 
@@ -125,7 +132,7 @@ macOS/Linux, in a new temporary directory outside the project:
 ```bash
 statistics_download_dir=$(mktemp -d)
 curl --fail --location --output "$statistics_download_dir/v0.1.0.zip" \
-  https://github.com/hindermath/spec-kit-preset-project-statistics-governance/archive/refs/tags/v0.1.0.zip
+  https://github.com/hindermath/spec-kit-preset-project-statistics-governance/archive/refs/tags/v0.1.1.zip
 # macOS:
 shasum -a 256 "$statistics_download_dir/v0.1.0.zip"
 # Linux, alternativ / alternatively:
@@ -138,7 +145,7 @@ Windows/PowerShell 7:
 $StatisticsDownloadDir = Join-Path ([IO.Path]::GetTempPath()) ('statistics-download-' + [guid]::NewGuid())
 $null = New-Item -ItemType Directory -Path $StatisticsDownloadDir
 $StatisticsZip = Join-Path $StatisticsDownloadDir 'v0.1.0.zip'
-Invoke-WebRequest -Uri 'https://github.com/hindermath/spec-kit-preset-project-statistics-governance/archive/refs/tags/v0.1.0.zip' -OutFile $StatisticsZip
+Invoke-WebRequest -Uri 'https://github.com/hindermath/spec-kit-preset-project-statistics-governance/archive/refs/tags/v0.1.1.zip' -OutFile $StatisticsZip
 Get-FileHash -LiteralPath $StatisticsZip -Algorithm SHA256
 ```
 
@@ -156,7 +163,7 @@ and `SHA256SUMS`. HTTPS or a tag name alone does not replace hash verification.
 Im bereits initialisierten Spec-Kit-Zielprojekt / in the initialized target:
 
 ```text
-specify preset add --from https://github.com/hindermath/spec-kit-preset-project-statistics-governance/archive/refs/tags/v0.1.0.zip --priority 90
+specify preset add --from https://github.com/hindermath/spec-kit-preset-project-statistics-governance/archive/refs/tags/v0.1.1.zip --priority 90
 specify preset list
 specify preset info project-statistics-governance
 specify preset resolve project-statistics-contract
