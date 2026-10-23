@@ -1,5 +1,14 @@
 # Project Statistics Governance
 
+<!-- current-package: 0.1.2 -->
+
+**Leserpfad / Reader path:** [Deutsch: Einstieg, Begriffe und Fehlerhilfe](docs/user-guide.md) · [English: start, terms and troubleshooting](docs/user-guide.EN.md).
+
+Quellkandidat **v0.1.2**. Der [Release-Stand](https://github.com/hindermath/spec-kit-preset-project-statistics-governance/releases) wird getrennt geprüft; ein Commit auf main ist noch keine Veröffentlichung oder Installation.
+
+*Source candidate v0.1.2. The release page records actual publication separately; a main-branch commit is not publication or installation.*
+
+
 Patch **0.1.2** liefert die verbesserte zweisprachige Einstiegs- und
 Kompositionsdokumentation. Verhalten und Berechtigungsgrenzen bleiben erhalten.
 [Release-Nachweis / Release record](docs/release-0.1.2-validation.md).
