@@ -1,5 +1,22 @@
 # Abhaengigkeiten pflegen / Dependency Maintenance
 
+## Native macOS-Pruefung / Native macOS validation
+
+DE: PR #15 aktualisiert setup-uv und verwendet fuer die unveraenderten nativen
+Fixtures `macos-15`. GitHub startet die bisherige Konfiguration
+`macos-14-arm64-us-default` nicht mehr (`configuration ... is not supported`).
+macOS bleibt eine verpflichtende eigene Plattform; kein Test wird entfernt.
+Dokumentationsentscheidung: UpdateRequired. Owner: Repository-Maintainer.
+Quelle: `.github/workflows/preset.yml`; Source-only, kein Home-Sync.
+Bei weiteren Runner- oder Plattformaenderungen erneut pruefen.
+
+EN: PR #15 updates setup-uv and runs the unchanged native fixtures on
+`macos-15`. GitHub rejects the previous `macos-14-arm64-us-default`
+configuration as unsupported. macOS remains a required separate platform;
+no test is removed. Documentation impact: UpdateRequired. Owner: repository
+maintainer. Source: `.github/workflows/preset.yml`; source-only, no Home sync.
+Re-evaluate after further runner or platform changes.
+
 ## Deutsch
 
 Verbindliche Konfiguration: [Dependabot](dependabot.yml). Owner: Repository-Maintainer.
