@@ -1,4 +1,4 @@
-#Requires -Version 7.3
+﻿#Requires -Version 7.3
 <#
 .SYNOPSIS
 DE: Historischen Kandidatenstand und belegte Veröffentlichung getrennt prüfen.
