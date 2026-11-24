@@ -39,6 +39,14 @@ switch($id){
         $psBlocks=@([regex]::Matches($readme,'(?s)\x60{3}powershell\r?\n(.*?)\r?\n\x60{3}'))
         $bash=@($bashBlocks|Where-Object {$_.Groups[1].Value.Contains("expected_sha256=")})[0].Groups[1].Value
         $ps=@($psBlocks|Where-Object {$_.Groups[1].Value.Contains('$ExpectedSha256 =')})[0].Groups[1].Value
+        foreach ($example in @($bash, $ps)) {
+            $archives = [regex]::Matches($example, 'v[0-9]+\.[0-9]+\.[0-9]+\.zip')
+            Assert-Documentation ($archives.Count -ge 2 -and @($archives | Where-Object Value -CNE "v$version.zip").Count -eq 0) 'checksum example uses current release for URL and filename'
+            Assert-Documentation ($example.Contains($url)) 'checksum example downloads the exact release URL'
+        }
+        $section = [regex]::Match($readme, '(?ms)^### Paket zuerst pruefen.*?(?=^### )').Value
+        $versions = [regex]::Matches($section, 'v[0-9]+\.[0-9]+\.[0-9]+')
+        Assert-Documentation ($versions.Count -gt 0 -and @($versions | Where-Object Value -CNE "v$version").Count -eq 0) 'checksum guide prose and examples use the same current release'
         $temp=Join-Path ([IO.Path]::GetTempPath()) ('statistics-doc-'+[guid]::NewGuid().ToString('N'))
         [void][IO.Directory]::CreateDirectory($temp)
         $savedTemp=$env:TMPDIR
@@ -48,8 +56,8 @@ switch($id){
                 $expected='a'*64;$actual=if($case -ceq 'mismatch'){'b'*64}else{$expected}
                 $psCase=$ps;$bashCase=$bash
                 if($case -cne 'missing'){
-                    $psCase=$psCase.Replace('REPLACE_WITH_V0_1_2_SOURCE_ARCHIVE_SHA256_FROM_RELEASE_NOTES',$expected)
-                    $bashCase=$bashCase.Replace('REPLACE_WITH_V0_1_2_SOURCE_ARCHIVE_SHA256_FROM_RELEASE_NOTES',$expected)
+                    $psCase=$psCase.Replace('REPLACE_WITH_SOURCE_ARCHIVE_SHA256_FROM_RELEASE_NOTES',$expected)
+                    $bashCase=$bashCase.Replace('REPLACE_WITH_SOURCE_ARCHIVE_SHA256_FROM_RELEASE_NOTES',$expected)
                 }
                 # The real README snippets run with explicit download/hash doubles.
                 # This tests the guard, never a fabricated future release hash.
