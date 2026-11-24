@@ -1,10 +1,10 @@
 # Project Statistics Governance
 
-<!-- current-package: 0.1.4 -->
+<!-- current-package: 0.1.5 -->
 
-Paketkennung: **v0.1.4**. [Vorbereitung und Veröffentlichungsgrenze](docs/release-0.1.4-validation.md). Die Release-Seite und der externe Archivnachweis belegen die Veröffentlichung, nicht dieser Vorbereitungsstand. Frühere Versionsnachweise unten bleiben historisch.
+Paketkennung: **v0.1.5**. [Vorbereitung und Veröffentlichungsgrenze](docs/release-0.1.5-validation.md). Die Release-Seite und der externe Archivnachweis belegen die Veröffentlichung, nicht dieser Vorbereitungsstand. Frühere Versionsnachweise unten bleiben historisch.
 
-<span lang="en">Package identity: v0.1.4. The release page and external archive evidence prove publication, not this preparation snapshot. Earlier version records below remain historical.</span>
+<span lang="en">Package identity: v0.1.5. The release page and external archive evidence prove publication, not this preparation snapshot. Earlier version records below remain historical.</span>
 
 [Release-Abschluss und Verbesserungsprofil / Publication closeout and improvement profile](docs/release-0.1.2-validation.md).
 
@@ -38,11 +38,9 @@ This optional MIT preset makes text inventory, artifact mix and visible Git
 activity traceable. Results bind Git sources, configuration and tool version.
 It does not measure quality, learner or individual performance, or AI time savings.
 
-**Paketstand / Package version:** `v0.1.2`. Dieser Dokumentationspatch berichtigt
-Download- und Prüfsummenanleitung. Der Feldtest von v0.1.0 bleibt historische
-Evidence, keine Abnahme jedes späteren ZIPs. Den Veröffentlichungsstand und
-den zum genauen Quellarchiv gehörenden SHA-256 zeigt nach Veröffentlichung die
-[Release-Seite / release page](https://github.com/hindermath/spec-kit-preset-project-statistics-governance/releases/tag/v0.1.2).
+**Paketstand / Package version:** `v0.1.5`. Der Feldtest von v0.1.0 bleibt historische Evidence. Die [Release-Notes zu v0.1.5](https://github.com/hindermath/spec-kit-preset-project-statistics-governance/releases/tag/v0.1.5) enthalten die SHA-256-Prüfsumme für das zugehörige Quellarchiv.
+
+*The v0.1.0 field test remains historical evidence. The v0.1.5 release notes record the SHA-256 digest for the corresponding source archive.*
 
 *This documentation patch corrects download/checksum guidance. The v0.1.0 field
 test remains historical evidence, not acceptance of each later ZIP. After
@@ -143,15 +141,15 @@ measurement performs no fetch or automatic tool installation.
 
 ### Paket zuerst pruefen / Verify the package first
 
-Lies zuerst die Release-Notes von **v0.1.2**. Kopiere ausschließlich den dort
-für die exakte `archive/refs/tags/v0.1.2.zip`-URL angegebenen SHA-256 in das
+Lies zuerst die Release-Notes von **v0.1.5**. Kopiere ausschließlich den dort
+für die exakte `archive/refs/tags/v0.1.5.zip`-URL angegebenen SHA-256 in das
 folgende Beispiel. Fehlt der Nachweis, stoppe und frage die Betreuung.
 Ein ZIP kann seine eigene endgültige Prüfsumme nicht in seiner README enthalten:
 Eine Änderung der README würde das ZIP und damit dessen Hash wieder verändern.
 Die Release-Notes sind deshalb der getrennte Prüfsummennachweis.
 
-*Read the v0.1.2 release notes first. Copy only the SHA-256 bound there to the
-exact archive/refs/tags/v0.1.2.zip URL into the example. Missing evidence means
+*Read the v0.1.5 release notes first. Copy only the SHA-256 bound there to the
+exact archive/refs/tags/v0.1.5.zip URL into the example. Missing evidence means
 stop and ask the maintainer. Embedding a ZIP's own final hash in its README
 would change that ZIP again; release notes provide the separate hash record.*
 
@@ -160,17 +158,17 @@ macOS/Linux, in a new temporary directory outside the project:
 
 ```bash
 statistics_download_dir=$(mktemp -d)
-expected_sha256='REPLACE_WITH_V0_1_2_SOURCE_ARCHIVE_SHA256_FROM_RELEASE_NOTES'
+expected_sha256='REPLACE_WITH_SOURCE_ARCHIVE_SHA256_FROM_RELEASE_NOTES'
 if ! printf '%s' "$expected_sha256" | LC_ALL=C grep -Eq '^[0-9a-fA-F]{64}$'; then
   printf 'STOP: SHA-256 aus den Release-Notes eintragen / enter SHA-256 from release notes\n' >&2
   exit 2
 fi
-curl --fail --location --output "$statistics_download_dir/v0.1.2.zip" \
-  https://github.com/hindermath/spec-kit-preset-project-statistics-governance/archive/refs/tags/v0.1.4.zip
+curl --fail --location --output "$statistics_download_dir/v0.1.5.zip" \
+  https://github.com/hindermath/spec-kit-preset-project-statistics-governance/archive/refs/tags/v0.1.5.zip
 if command -v shasum >/dev/null 2>&1; then
-  actual_sha256=$(shasum -a 256 "$statistics_download_dir/v0.1.2.zip" | cut -d ' ' -f 1)
+  actual_sha256=$(shasum -a 256 "$statistics_download_dir/v0.1.5.zip" | cut -d ' ' -f 1)
 else
-  actual_sha256=$(sha256sum "$statistics_download_dir/v0.1.2.zip" | cut -d ' ' -f 1)
+  actual_sha256=$(sha256sum "$statistics_download_dir/v0.1.5.zip" | cut -d ' ' -f 1)
 fi
 if [ "$(printf '%s' "$actual_sha256" | tr 'A-F' 'a-f')" != "$(printf '%s' "$expected_sha256" | tr 'A-F' 'a-f')" ]; then
   printf 'STOP: Prüfsumme abweichend / checksum mismatch\n' >&2
@@ -183,10 +181,10 @@ Windows/PowerShell 7:
 ```powershell
 $StatisticsDownloadDir = Join-Path ([IO.Path]::GetTempPath()) ('statistics-download-' + [guid]::NewGuid())
 $null = New-Item -ItemType Directory -Path $StatisticsDownloadDir
-$ExpectedSha256 = 'REPLACE_WITH_V0_1_2_SOURCE_ARCHIVE_SHA256_FROM_RELEASE_NOTES'
+$ExpectedSha256 = 'REPLACE_WITH_SOURCE_ARCHIVE_SHA256_FROM_RELEASE_NOTES'
 if ($ExpectedSha256 -notmatch '^[0-9a-fA-F]{64}$') { throw 'STOP: SHA-256 aus den Release-Notes eintragen / enter SHA-256 from release notes' }
-$StatisticsZip = Join-Path $StatisticsDownloadDir 'v0.1.2.zip'
-Invoke-WebRequest -Uri 'https://github.com/hindermath/spec-kit-preset-project-statistics-governance/archive/refs/tags/v0.1.4.zip' -OutFile $StatisticsZip
+$StatisticsZip = Join-Path $StatisticsDownloadDir 'v0.1.5.zip'
+Invoke-WebRequest -Uri 'https://github.com/hindermath/spec-kit-preset-project-statistics-governance/archive/refs/tags/v0.1.5.zip' -OutFile $StatisticsZip
 $ActualSha256 = (Get-FileHash -LiteralPath $StatisticsZip -Algorithm SHA256).Hash
 if ($ActualSha256 -ine $ExpectedSha256) { throw 'STOP: Prüfsumme abweichend / checksum mismatch' }
 ```
@@ -208,7 +206,7 @@ alone does not replace hash verification.
 Im bereits initialisierten Spec-Kit-Zielprojekt / in the initialized target:
 
 ```text
-specify preset add --from https://github.com/hindermath/spec-kit-preset-project-statistics-governance/archive/refs/tags/v0.1.4.zip --priority 90
+specify preset add --from https://github.com/hindermath/spec-kit-preset-project-statistics-governance/archive/refs/tags/v0.1.5.zip --priority 90
 specify preset list
 specify preset info project-statistics-governance
 specify preset resolve project-statistics-contract
